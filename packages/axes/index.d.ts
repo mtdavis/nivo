@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Dimensions } from '@nivo/core'
-import { Scale } from '@nivo/scales'
+import { ScaleSpec } from '@nivo/scales'
 
 declare module '@nivo/axes' {
     export type TickFormatter = (value: number | string | Date) => string | number
@@ -20,8 +20,8 @@ declare module '@nivo/axes' {
     type AxisPositions = Partial<{ [K in Orient]: AxisProps }>
 
     interface Scales {
-        xScale?: Scale
-        yScale?: Scale
+        xScale?: ScaleSpec
+        yScale?: ScaleSpec
     }
 
     export interface AxesProps extends Dimensions, AxisPositions, Scales {}
