@@ -152,11 +152,17 @@ export const generateGroupedBars = ({
     ...props
 }) => {
     const data = normalizeData(props.data, keys)
-    const [axis, range] = layout === 'vertical' ? ['y', [0, width]] : ['x', [height, 0]]
-    const indexScale = getIndexScale(data, props.getIndex, range, padding, indexScaleConfig)
+    const [axis, otherAxis, size] = layout === 'vertical' ? ['y', 'x', width] : ['x', 'y', height]
+    const indexScale = getIndexScale(
+        data,
+        props.getIndex,
+        padding,
+        indexScaleConfig,
+        size,
+        otherAxis
+    )
 
     const scaleSpec = {
-        axis,
         max: maxValue,
         min: minValue,
         reverse,
@@ -170,7 +176,12 @@ export const generateGroupedBars = ({
     const min = clampMin(Math.min(...values))
     const max = Math.max(...values)
 
-    const scale = computeScale(scaleSpec, { [axis]: { min, max } }, width, height)
+    const scale = computeScale(
+        scaleSpec,
+        { all: values, min, max },
+        axis === 'x' ? width : height,
+        axis
+    )
 
     const [xScale, yScale] = layout === 'vertical' ? [indexScale, scale] : [scale, indexScale]
 
