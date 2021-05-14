@@ -18,7 +18,7 @@ import {
 import { OrdinalColorScaleConfig } from '@nivo/colors'
 import { LegendProps } from '@nivo/legends'
 import { AxisProps, GridValues } from '@nivo/axes'
-import { Scale } from '@nivo/scales'
+import { ScaleSpec } from '@nivo/scales'
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
@@ -91,8 +91,8 @@ declare module '@nivo/scatterplot' {
     export type CustomTooltip = (props: TooltipProps) => React.ReactNode
 
     export interface ScatterPlotComputedProps {
-        xScale: Scale
-        yScale: Scale
+        xScale: ScaleSpec
+        yScale: ScaleSpec
         nodes: Node[]
         innerWidth: number
         innerHeight: number
@@ -118,9 +118,9 @@ declare module '@nivo/scatterplot' {
     export interface ScatterPlotProps {
         data: Serie[]
 
-        xScale?: Scale
+        xScale?: ScaleSpec
         xFormat?: string | ValueFormatter
-        yScale?: Scale
+        yScale?: ScaleSpec
         yFormat?: string | ValueFormatter
 
         margin?: Box
